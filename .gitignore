@@ -1,0 +1,34 @@
+# Build and compilation outputs
+bin/
+*.o
+*.a
+*.so
+*.dylib
+*.out
+
+# Standard ML compiler temporary directories
+.cm/
+MLB/
+*.mlton.*
+.mlton.*
+
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+
+# Editor and OS metadata
+.DS_Store
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Test output and runtime logs
+test_output/
+logs/
+*.log
+coverage/
+tmp/
+data/journal/
