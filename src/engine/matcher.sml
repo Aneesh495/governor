@@ -135,7 +135,11 @@ struct
                                                            PriceLevel.addOrder lWithout finalMaker
                                                          else lWithout
 
-                                               val updatedB = OrderBook.recordTrade b askP fillQty timestamp
+                                               val bWithTrade = OrderBook.recordTrade b askP fillQty timestamp
+                                                val updatedB =
+                                                    if #leaves_qty finalMaker <= 0 then
+                                                      OrderBook.removeOrderIndex bWithTrade (#id makerOrd)
+                                                    else bWithTrade
                                              in
                                                processAllocations (rest, updatedB, updatedAggOrd, trade :: trades, updatedLvl)
                                              end
@@ -195,7 +199,11 @@ struct
                                                            PriceLevel.addOrder lWithout finalMaker
                                                          else lWithout
 
-                                               val updatedB = OrderBook.recordTrade b bidP fillQty timestamp
+                                               val bWithTrade = OrderBook.recordTrade b bidP fillQty timestamp
+                                                val updatedB =
+                                                    if #leaves_qty finalMaker <= 0 then
+                                                      OrderBook.removeOrderIndex bWithTrade (#id makerOrd)
+                                                    else bWithTrade
                                              in
                                                processAllocations (rest, updatedB, updatedAggOrd, trade :: trades, updatedLvl)
                                              end

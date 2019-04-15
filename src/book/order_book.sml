@@ -290,6 +290,23 @@ struct
         last_update_ts = #last_update_ts b
       }
 
+  fun removeOrderIndex (b : book) (targetId : Types.order_id) : book =
+      case OrderMap.find (#order_index b, targetId) of
+          NONE => b
+        | SOME _ =>
+            let val (newIndex, _) = OrderMap.remove (#order_index b, targetId) in
+              {
+                symbol = #symbol b,
+                bids = #bids b,
+                asks = #asks b,
+                order_index = newIndex,
+                last_trade_price = #last_trade_price b,
+                last_trade_qty = #last_trade_qty b,
+                total_volume = #total_volume b,
+                last_update_ts = #last_update_ts b
+              }
+            end
+
   fun recordTrade (b : book) (p : Types.price) (q : Types.qty) (ts : Types.timestamp_ns) : book =
       {
         symbol = #symbol b,

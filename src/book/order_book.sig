@@ -36,6 +36,7 @@ sig
   val updateAskLevel : book -> PriceLevel.price_level -> book
   val removeBidLevel : book -> Types.price -> book
   val removeAskLevel : book -> Types.price -> book
+  val removeOrderIndex : book -> Types.order_id -> book
 
   (* Trade recording *)
   val recordTrade : book -> Types.price -> Types.qty -> Types.timestamp_ns -> book
