@@ -12,7 +12,7 @@ struct
     | DecrementIncoming of Types.qty * string
     | DecrementResting of Types.order_id * Types.qty * string
 
-  fun evaluateSMP { book, order = inOrd, mode } : smp_action =
+  fun evaluateSMP { book, order = inOrd : Order.order, mode } : smp_action =
       let
         val clientId = #client_id inOrd
         val side = #side inOrd
@@ -38,7 +38,7 @@ struct
       in
         case conflictingOrderOpt of
             NONE => NoSelfMatch
-          | SOME restingOrd =>
+          | SOME (restingOrd : Order.order) =>
               let
                 val restingId = #id restingOrd
                 val inQty = #leaves_qty inOrd

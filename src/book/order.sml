@@ -22,16 +22,17 @@ struct
     updated_at : Types.timestamp_ns
   }
 
-  fun create { id, client_id, symbol, side, order_type, time_in_force, price, qty, timestamp } =
+  fun create { id, client_id, symbol, side, order_type, time_in_force, price, qty, timestamp } : order =
       let
+        val zeroQty : Types.qty = 0
         val (peak, hidden, leaves) =
             case order_type of
                 Types.Iceberg { peak_qty, ... } =>
                   if qty > peak_qty then
                     (peak_qty, qty - peak_qty, peak_qty)
                   else
-                    (qty, 0, qty)
-              | _ => (qty, 0, qty)
+                    (qty, zeroQty, qty)
+              | _ => (qty, zeroQty, qty)
       in
         {
           id = id,
@@ -43,7 +44,7 @@ struct
           price = price,
           initial_qty = qty,
           leaves_qty = leaves,
-          cum_qty = 0,
+          cum_qty = zeroQty,
           peak_qty = peak,
           hidden_qty = hidden,
           status = Types.Accepted,

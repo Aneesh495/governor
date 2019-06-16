@@ -12,13 +12,13 @@ struct
   fun elapsedNanoseconds (start : timestamp_ns) (finish : timestamp_ns) : timestamp_ns =
       finish - start
 
-  fun fromSeconds s = s * 1000000000
-  fun fromMilliseconds ms = ms * 1000000
-  fun fromMicroseconds us = us * 1000
+  fun fromSeconds (s : LargeInt.int) : timestamp_ns = s * 1000000000
+  fun fromMilliseconds (ms : LargeInt.int) : timestamp_ns = ms * 1000000
+  fun fromMicroseconds (us : LargeInt.int) : timestamp_ns = us * 1000
 
-  fun toSeconds ns = ns div 1000000000
-  fun toMilliseconds ns = ns div 1000000
-  fun toMicroseconds ns = ns div 1000
+  fun toSeconds (ns : timestamp_ns) : LargeInt.int = ns div 1000000000
+  fun toMilliseconds (ns : timestamp_ns) : LargeInt.int = ns div 1000000
+  fun toMicroseconds (ns : timestamp_ns) : LargeInt.int = ns div 1000
 
   fun formatDuration (ns : timestamp_ns) : string =
       if ns < 1000 then
