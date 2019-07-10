@@ -85,7 +85,7 @@ struct
                 splitTriggered (rest, ord :: kept, triggered)
 
         val (keptOrders, triggeredOrders) = splitTriggered (allStops, [], [])
-        val newMap = List.foldl (fn (o : Order.order, m) => StopMap.insert (m, #id o, o)) StopMap.empty keptOrders
+        val newMap = List.foldl (fn (ord : Order.order, m) => StopMap.insert (m, #id ord, ord)) StopMap.empty keptOrders
       in
         ({ pending_stops = newMap }, List.rev triggeredOrders)
       end
