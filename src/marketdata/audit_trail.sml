@@ -121,19 +121,19 @@ struct
                 CatOrderAccepted { order_id, client_id, symbol, side, price, qty } =>
                   "ACCEPTED ord=" ^ LargeInt.toString order_id ^ " client=" ^ client_id ^
                   " sym=" ^ symbol ^ " side=" ^ Types.sideToString side ^
-                  " p=" ^ Types.formatPrice price ^ " q=" ^ LargeInt.toString qty
+                  " p=" ^ Types.priceToString price ^ " q=" ^ LargeInt.toString qty
               | CatOrderModified { order_id, old_qty, new_qty, old_price, new_price } =>
                   "MODIFIED ord=" ^ LargeInt.toString order_id ^
                   " q=" ^ LargeInt.toString old_qty ^ "->" ^ LargeInt.toString new_qty ^
-                  " p=" ^ Types.formatPrice old_price ^ "->" ^ Types.formatPrice new_price
+                  " p=" ^ Types.priceToString old_price ^ "->" ^ Types.priceToString new_price
               | CatOrderCancelled { order_id, cancelled_qty, reason } =>
                   "CANCELLED ord=" ^ LargeInt.toString order_id ^ " q=" ^ LargeInt.toString cancelled_qty ^ " reason=" ^ reason
               | CatTradeExecuted { match_id, maker_order_id, taker_order_id, symbol, price, qty } =>
                   "TRADE match=" ^ LargeInt.toString match_id ^ " maker=" ^ LargeInt.toString maker_order_id ^
                   " taker=" ^ LargeInt.toString taker_order_id ^ " sym=" ^ symbol ^
-                  " p=" ^ Types.formatPrice price ^ " q=" ^ LargeInt.toString qty
+                  " p=" ^ Types.priceToString price ^ " q=" ^ LargeInt.toString qty
               | CatHaltTriggered { symbol, trigger_price, state } =>
-                  "HALT sym=" ^ symbol ^ " state=" ^ state ^ " p=" ^ Types.formatPrice trigger_price
+                  "HALT sym=" ^ symbol ^ " state=" ^ state ^ " p=" ^ Types.priceToString trigger_price
       in
         "[CAT #" ^ seqStr ^ " @ " ^ tsStr ^ "] " ^ evDesc
       end
