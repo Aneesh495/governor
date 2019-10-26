@@ -16,6 +16,8 @@ src/core/time_util.sig
 src/core/time_util.sml
 src/core/ring_buffer.sig
 src/core/ring_buffer.sml
+src/core/latency_histogram.sig
+src/core/latency_histogram.sml
 
 src/book/order.sig
 src/book/order.sml
@@ -23,6 +25,8 @@ src/book/price_level.sig
 src/book/price_level.sml
 src/book/order_book.sig
 src/book/order_book.sml
+src/book/order_modify.sig
+src/book/order_modify.sml
 src/book/book_manager.sig
 src/book/book_manager.sml
 
@@ -36,6 +40,18 @@ src/engine/matcher.sig
 src/engine/matcher.sml
 src/engine/auction.sig
 src/engine/auction.sml
+src/engine/vwap_calculator.sig
+src/engine/vwap_calculator.sml
+src/engine/microprice.sig
+src/engine/microprice.sml
+src/engine/stop_order_manager.sig
+src/engine/stop_order_manager.sml
+src/engine/trailing_stop.sig
+src/engine/trailing_stop.sml
+src/engine/oco_manager.sig
+src/engine/oco_manager.sml
+src/engine/bracket_order.sig
+src/engine/bracket_order.sml
 
 src/risk/risk_limits.sig
 src/risk/risk_limits.sml
@@ -45,6 +61,8 @@ src/risk/self_match.sig
 src/risk/self_match.sml
 src/risk/risk_engine.sig
 src/risk/risk_engine.sml
+src/risk/fee_calculator.sig
+src/risk/fee_calculator.sml
 
 src/marketdata/market_data_event.sig
 src/marketdata/market_data_event.sml
@@ -54,6 +72,8 @@ src/marketdata/level2_feed.sig
 src/marketdata/level2_feed.sml
 src/marketdata/event_journal.sig
 src/marketdata/event_journal.sml
+src/marketdata/audit_trail.sig
+src/marketdata/audit_trail.sml
 
 src/sim/synthetic_trader.sig
 src/sim/synthetic_trader.sml
@@ -61,9 +81,13 @@ src/sim/market_replay.sig
 src/sim/market_replay.sml
 src/sim/exchange_sim.sig
 src/sim/exchange_sim.sml
+src/sim/avellaneda_stoikov.sig
+src/sim/avellaneda_stoikov.sml
 
 src/protocol/binary_codec.sig
 src/protocol/binary_codec.sml
+src/protocol/sbe_codec.sig
+src/protocol/sbe_codec.sml
 src/protocol/fix_message.sig
 src/protocol/fix_message.sml
 src/protocol/json_codec.sig

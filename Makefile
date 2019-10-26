@@ -6,9 +6,8 @@ PYTHON ?= python3
 
 BIN_DIR = bin
 TARGET = $(BIN_DIR)/governor
-TEST_TARGET = $(BIN_DIR)/governor_test
 
-.PHONY: all clean test run verify format check
+.PHONY: all clean test test-props test-stress bench sim run verify
 
 all: $(TARGET)
 
@@ -18,13 +17,26 @@ $(BIN_DIR):
 $(TARGET): $(BIN_DIR) governor.mlb
 	$(MLTON) -output $(TARGET) governor.mlb
 
-test-compile: $(BIN_DIR) governor_test.mlb
-	$(MLTON) -output $(TEST_TARGET) governor_test.mlb
-
-test:
-	@echo "Running verification and test suite..."
-	$(PYTHON) tools/verify_clean_code.py
+test: verify
+	@echo "Executing master test suite..."
 	$(POLY) --script test/run_tests.sml
+
+test-props: verify
+	@echo "Executing property-based tests..."
+	$(POLY) --script test/test_properties_rbtree.sml
+	$(POLY) --script test/test_properties_matching.sml
+
+test-stress: verify
+	@echo "Executing 50,000-order stress harness..."
+	$(POLY) --script test/test_stress.sml
+
+bench: $(TARGET)
+	@echo "Executing 100,000-order native benchmark..."
+	./$(TARGET) --bench 100000
+
+sim: $(TARGET)
+	@echo "Executing market simulation..."
+	./$(TARGET) --sim 1000
 
 run: $(TARGET)
 	./$(TARGET)
