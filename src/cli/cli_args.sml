@@ -47,6 +47,10 @@ struct
               let val count = case Int.fromString countStr of SOME c => c | NONE => 50000 in
                 loop (rest, { mode = ModeBenchmark { order_count = count }, symbols = #symbols opts, log_file = #log_file opts })
               end
+          | loop ("--bench" :: countStr :: rest, opts) =
+              let val count = case Int.fromString countStr of SOME c => c | NONE => 50000 in
+                loop (rest, { mode = ModeBenchmark { order_count = count }, symbols = #symbols opts, log_file = #log_file opts })
+              end
           | loop ("--test" :: rest, opts) =
               loop (rest, { mode = ModeTest, symbols = #symbols opts, log_file = #log_file opts })
           | loop ("--help" :: _, opts) =
